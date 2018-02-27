@@ -7,8 +7,12 @@
             <h1>
                 Hello World
             </h1>
-            <%= students%>
-            <%= /*studentList(students)*/ %>
+            <ul>
+                <%= params.students.map(function(item) {
+                  return "<li>" + item.name + "</li>";
+                }).join("");
+                %>
+            </ul>
             <%= /*studentForm()*/ %>
         </body>
     </html>

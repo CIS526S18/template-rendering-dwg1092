@@ -17,7 +17,7 @@ function render(template, params) {
     fs.readfile(path.join('veiw', 'templates', template), function(err, data){
         if(err) return callback(err);
 
-        var html = data.toString().replace( /<%=(.*)%>/g, function(match, p1) {
+        var html = data.toString().replace(/<%=(.*)%>/g, function(match, p1) {
             return eval(p1);
         });
 

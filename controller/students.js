@@ -18,6 +18,7 @@ module.exports = {
   */
 function list(req, res) {
   var students = studentModel.getStudents();
+  console.log(students);
   veiw.render('students/index.html', {students: students}, function(err, html){
     if(err) {
       res.statusCode = 500;
