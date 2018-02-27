@@ -2,7 +2,12 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports =  {
+    load: load,
     render: render
+}
+
+function load(directory){
+    // load the directory of templates into cache
 }
 
 function render(template, params) {
@@ -12,16 +17,14 @@ function render(template, params) {
         params = {};
     }
 
-    
 
-    fs.readfile(path.join('veiw', 'templates', template), function(err, data){
-        if(err) return callback(err);
-
-        var html = data.toString().replace(/<%=(.*)%>/g, function(match, p1) {
-            return eval(p1);
+        var html = cache[template].toString().replace(/<%=(.*)%>/g, function(match, code) {
+            code = code.replace(/render\((.+)\)/.g, function(match, data){
+                render();
+            });
+            return ('var params = ' + JSON.stringify(params) + ';' + code);
         });
 
 
         callback(err, html);
-    });
 }
